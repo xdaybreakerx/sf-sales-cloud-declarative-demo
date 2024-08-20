@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <decisions>
+        <description>Filters based on Annual Revenue of Account and sets the path of the Flow.</description>
+        <name>Annual_revenue_of_Account</name>
+        <label>Annual revenue of Account</label>
+        <locationX>314</locationX>
+        <locationY>335</locationY>
+        <defaultConnector>
+            <targetReference>Set_Rating_to_Cold</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Less than $250,000</defaultConnectorLabel>
+        <rules>
+            <name>Over_500_000</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.AnnualRevenue</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>500000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Rating_to_Hot</targetReference>
+            </connector>
+            <label>Over $500,000</label>
+        </rules>
+        <rules>
+            <name>Between_250_000_and_500_000</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.AnnualRevenue</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>250000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.AnnualRevenue</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>500000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Rating_to_Warm</targetReference>
+            </connector>
+            <label>Between $250,000 and $500,000</label>
+        </rules>
+    </decisions>
+    <description>Sets Account Rating based on Annual Revenue field</description>
+    <environments>Default</environments>
+    <interviewLabel>Account - Record Triggered Flow - Account Rating based on Annual Revenue {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account - Record Triggered Flow - Account Rating based on Annual Revenue</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Sets Account Rating to Cold</description>
+        <name>Set_Rating_to_Cold</name>
+        <label>Set Rating to Cold</label>
+        <locationX>578</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>Rating</field>
+            <value>
+                <stringValue>Cold</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets Account Rating to Hot</description>
+        <name>Set_Rating_to_Hot</name>
+        <label>Set Rating to Hot</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>Rating</field>
+            <value>
+                <stringValue>Hot</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets Account Rating to Warm</description>
+        <name>Set_Rating_to_Warm</name>
+        <label>Set Rating to Warm</label>
+        <locationX>314</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>Rating</field>
+            <value>
+                <stringValue>Warm</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Annual_revenue_of_Account</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AnnualRevenue</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningExperienceTheme xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultBrandingSet>LEXTHEMINGWoollyCloudFarmTheme</defaultBrandingSet>
+    <description>Created with assets provided for Brand Image and Colour Palette.</description>
+    <masterLabel>Woolly Cloud Farm Theme</masterLabel>
+    <shouldOverrideLoadingImage>false</shouldOverrideLoadingImage>
+</LightningExperienceTheme>

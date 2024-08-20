@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>End_Email_Campaign__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Ends Lead Email Campaign. Select if the Lead is to be converted, or if the Lead has expressed they wish to no longer receive emails related to this campaign.</description>
+    <inlineHelpText>Select to stop Email Campaign. Select prior to converting Lead.</inlineHelpText>
+    <label>End Email Campaign?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>
