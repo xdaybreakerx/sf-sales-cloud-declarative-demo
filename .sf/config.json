@@ -1,3 +1,4 @@
 {
-  "target-org": "production-wcf"
+  "target-org": "production-wcf",
+  "target-dev-hub": "backupfiles"
 }
